@@ -5,7 +5,15 @@ const Users = require('../users/users-model')
 
 const router = express.Router()
 
-router.post('/', (req, res) => {
+router.post('/register', (req, res) => {
+  const credentials = req.body
+
+  Users.add(credentials)
+    .then(saved => res.status(201).json(saved))
+    .catch(err => res.status(500).json({ message: 'error registering new user' }))
+})
+
+router.post('/login', (req, res) => {
   const { username, password } = req.body
 
   Users.findBy({ username })
