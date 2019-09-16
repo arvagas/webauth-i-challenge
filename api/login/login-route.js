@@ -6,13 +6,13 @@ const Login = require('./login-model')
 const router = express.Router()
 
 router.post('/', (req, res) => {
-  const { user, password } = req.body
+  const { username, password } = req.body
 
-  Login.findBy({ user })
+  Login.findBy({ username })
     .first()
-    .then(login => {
-      if (user && bcrypt.compareSync(password, login.password)) res.json(`Welcome ${login.user}!`)
-      else res.status(401).json({ message: 'invalid credentials' })
+    .then(user => {
+      if (user && bcrypt.compareSync(password, user.password)) res.json(`Logged in!`)
+      else res.status(401).json({ message: 'You shall not pass!' })
     })
     .catch(err => res.status(500).json({ message: 'error logging in' }))
 })
