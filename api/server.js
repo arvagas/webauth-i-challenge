@@ -3,6 +3,7 @@ const session = require('express-session')
 
 const authRouter = require('./auth/auth-router')
 const usersRoute = require('./users/users-route')
+const restrictedRoute = require('./restricted/restricted-route')
 const mw = require('./server-middleware')
 
 const server = express()
@@ -27,6 +28,7 @@ server.use(mw.logger)
 // Route handling
 server.use('/api', authRouter)
 server.use('/api/users', usersRoute)
+server.use('/api/restricted', restrictedRoute)
 
 // Hello world test
 server.get('/', (req, res) => {
