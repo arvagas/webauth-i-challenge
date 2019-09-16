@@ -1,13 +1,13 @@
 const express = require('express')
 
-const Register = require('./register-model')
+const Users = require('../users/users-model')
 
 const router = express.Router()
 
 router.post('/', (req, res) => {
   const credentials = req.body
 
-  Register.add(credentials)
+  Users.add(credentials)
     .then(saved => res.status(201).json(saved))
     .catch(err => res.status(500).json({ message: 'error registering new user' }))
 })

@@ -1,6 +1,6 @@
 const bcrypt = require('bcryptjs')
 
-const Users = require('../api/login/login-model')
+const Users = require('../api/users/users-model')
 
 module.exports = function restricted(req, res, next) {
   const { username, password } = req.headers
