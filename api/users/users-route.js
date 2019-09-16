@@ -1,6 +1,6 @@
 const express = require('express')
 
-const Users = require('./user-model')
+const Users = require('./users-model')
 const restricted = require('../../auth/restricted')
 
 const router = express.Router()
