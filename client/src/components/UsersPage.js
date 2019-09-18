@@ -14,7 +14,7 @@ const UsersPage = ({ getUsers }) => {
   if (users === undefined) return <p>Is loading...</p>
   return (
     <div>
-      {users.map(user => (
+      {!users.length ? <p>Please log in to see users.</p> : users.map(user => (
         <UserCard key={user.id} user={user}/>
       ))}
     </div>

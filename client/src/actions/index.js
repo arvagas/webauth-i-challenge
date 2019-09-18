@@ -13,6 +13,10 @@ export const GET_USERS_START = 'GET_USERS_START'
 export const GET_USERS_SUCCESS = 'GET_USERS_SUCCESS'
 export const GET_USERS_FAIL = 'GET_USERS_FAIL'
 
+export const GET_LOGOUT_START = 'GET_LOGOUT_START'
+export const GET_LOGOUT_SUCCESS = 'GET_LOGOUT_SUCCESS'
+export const GET_LOGOUT_FAIL = 'GET_LOGOUT_FAIL'
+
 // Dispatch functions
 export const login = (credentials, history) => dispatch => {
   dispatch({ type: POST_LOGIN_START })
@@ -49,5 +53,18 @@ export const getUsers = () => dispatch => {
     })
     .catch(err => {
       dispatch({ type: GET_USERS_FAIL, payload: err.response.data.message })
+    })
+}
+
+export const logout = () => dispatch => {
+  console.log('invoked')
+  dispatch({ type: GET_LOGOUT_START })
+  axios
+    .get(`/api/auth/logout`)
+    .then(res => {
+      dispatch({ type: GET_LOGOUT_SUCCESS })
+    })
+    .catch(err => {
+      dispatch({ type: GET_LOGOUT_FAIL, payload: err.response.data.message })
     })
 }
