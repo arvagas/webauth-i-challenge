@@ -9,6 +9,10 @@ export const POST_REGISTER_START = 'POST_REGISTER_START'
 export const POST_REGISTER_SUCCESS = 'POST_REGISTER_SUCCESS'
 export const POST_REGISTER_FAIL = 'POST_REGISTER_FAIL'
 
+export const GET_USERS_START = 'GET_USERS_START'
+export const GET_USERS_SUCCESS = 'GET_USERS_SUCCESS'
+export const GET_USERS_FAIL = 'GET_USERS_FAIL'
+
 // Dispatch functions
 export const login = (credentials, history) => dispatch => {
   dispatch({ type: POST_LOGIN_START })
@@ -33,5 +37,17 @@ export const register = (credentials, history) => dispatch => {
     })
     .catch(err => {
       dispatch({ type: POST_REGISTER_FAIL, payload: err.response.data.message })
+    })
+}
+
+export const getUsers = () => dispatch => {
+  dispatch({ type: GET_USERS_START })
+  axios
+    .get(`/api/users`)
+    .then(res => {
+      dispatch({ type: GET_USERS_SUCCESS, payload: res.data })
+    })
+    .catch(err => {
+      dispatch({ type: GET_USERS_FAIL, payload: err.response.data.message })
     })
 }
